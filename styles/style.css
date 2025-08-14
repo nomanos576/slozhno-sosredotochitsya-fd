@@ -20,7 +20,7 @@
   padding: 0 10px;
   display: grid;
   grid-column: 1;
-  grid-template-rows: min-content min-content 1fr;
+  grid-template-rows: 1fr min-content 1fr;
   position: relative;
 }
 
@@ -30,7 +30,6 @@
   line-height: 83%;
   color: var(--color-title-main);
   text-shadow: 4px 4px 0 var(--color-accent);
-  padding-bottom: clamp(3.563rem, 26.718vw - 2.699rem, 10.125rem);
 }
 
 .header__description {
@@ -38,6 +37,7 @@
   height: fit-content;
   justify-self: right;
   font-weight: 700;
+  align-self: center;
 }
 
 .header__description_decorated {
@@ -47,8 +47,7 @@
 
 .header__theme-menu {
   justify-self: right;
-  padding-top: clamp(4.688rem, 29.771vw - 2.29rem, 12rem);
-  padding-bottom: clamp(4.063rem, 28.244vw - 2.557rem, 11rem);
+  align-self: center;
 }
 
 .header__theme-menu-list {
@@ -105,8 +104,7 @@
   pointer-events: none;
 }
 
-.header_decorated::before,
-.footer_decorated::before {
+.decorated-zone::before {
   content: "";
   position: absolute;
   display: block;
@@ -120,8 +118,7 @@
   z-index: 2;
 }
 
-.header_decorated::after,
-.footer_decorated::after {
+.decorated-zone::after {
   content: "";
   display: inline-block;
   position: absolute;
@@ -145,7 +142,7 @@
 .content__section {
   display: grid;
   grid-template-columns: 1fr;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   width: 100%;
   justify-self: left;
 }
@@ -170,7 +167,7 @@
   grid-column: 1;
 }
 
-.content__text-block:not(:last-child) {
+.content__text-block {
   margin-bottom: 20px;
   grid-column: 1;
 }
@@ -188,6 +185,7 @@
 .content__title_type_main {
   font-size: inherit;
   margin-bottom: 20px;
+  height: min-content;
 }
 
 .content__gallery-image {
@@ -203,7 +201,7 @@
 
 .content__link {
   text-decoration: none;
-  text-shadow: 2px 1px var(--color-accent);
+  text-shadow: 2px 2px 0 var(--color-accent);
 }
 
 .content__link:hover {
@@ -231,7 +229,7 @@
   font-size: var(--font-size-header-mobile);
   line-height: 83%;
   color: var(--color-title-main);
-  text-shadow: 4px 4px 0 var(--color-title-shadow);
+  text-shadow: 2px 2px 0 var(--color-title-shadow);
   justify-self: center;
   align-self: center;
 }
@@ -245,14 +243,12 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .header_decorated::before,
-  .footer_decorated::before {
+  .decorated-zone::before {
     right: 20px;
     top: 20px;
   }
 
-  .header_decorated::after,
-  .footer_decorated::after {
+  .decorated-zone::after {
     left: 20px;
     bottom: 20px;
   }
@@ -287,10 +283,14 @@
     padding: 60px 20px;
   }
 
+  .content__container .content__title {
+    margin-left: 6px;
+  }
+
   .content__section {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 80px;
+    margin-bottom: 60px;
     column-gap: 20px;
   }
 
@@ -298,12 +298,16 @@
     grid-column: 1;
   }
 
-  .content__section_type_large .content__text-block {
+  .content__title_type_main {
+    grid-column: 2 / 4;
+  }
+
+  .content__section_type_rows .content__text-block {
     grid-column: 2 / 4;
     margin-left: 6.68px;
   }
 
-  .content__section_type_small .content__text-block {
+  .content__section_type_columns .content__text-block {
     grid-column: 1 / -1;
   }
 
@@ -333,6 +337,10 @@
     grid-column: 2 / -1;
     grid-row: 3;
   }
+  .content__container {
+    display: grid;
+    grid-column: 2 / 4;
+  }
 }
 
 @media (width >= 1024px) {
@@ -345,26 +353,35 @@
     padding: 0;
   }
 
+  .header__description {
+    align-self: baseline;
+    margin-top: 5px;
+  }
+
   .header__title {
     padding-bottom: 114px;
   }
 
-  .content__section_type_small {
+  .content__section_type_columns {
     display: grid;
     grid-auto-flow: row;
   }
 
-  .content__section_type_small .content__section-title {
+  .content__section_type_columns .content__section-title {
     grid-row: 1;
     grid-column: 1 / -1;
     max-width: 315px;
   }
 
-  .content__section_type_small .content__text-block {
+  .content__container .content__title {
+    margin-left: 0;
+  }
+
+  .content__section_type_columns .content__text-block {
     grid-column: auto;
   }
 
-  .content__section_type_large .content__text-block {
+  .content__section_type_rows .content__text-block {
     margin-left: 0;
   }
 
